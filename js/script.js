@@ -87,6 +87,39 @@ Cart is empty
 cartItems.innerHTML = html;
 }
 
+function removeFish(index){
+
+fishCart.splice(index,1);
+
+updateTotals();
+    const badge =
+document.getElementById("cart-badge");
+
+if(badge){
+
+badge.textContent =
+fishCart.length +
+relicCart.length;
+}
+renderCart();
+}
+
+function removeRelic(index){
+
+relicCart.splice(index,1);
+
+updateTotals();
+renderCart();
+}
+
+function toggleCart(){
+
+document
+.getElementById("cart-panel")
+.classList
+.toggle("active");
+}
+
 function checkout(){
 
     if(cart.length === 0){
