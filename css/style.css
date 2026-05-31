@@ -38,6 +38,35 @@ body{
     transform:translateY(-3px);
 }
 
+.checkout-btn{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+
+    background:linear-gradient(
+        135deg,
+        #25D366,
+        #00ff88
+    );
+
+    color:#0b1f14;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
 /* HEADER */
 header{
     background:
