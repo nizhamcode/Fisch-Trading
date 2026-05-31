@@ -1,257 +1,113 @@
-<script>
 
-let fishCart = [];
-let relicCart = [];
+let cart = [];
 
-/* =========================
-   UPDATE TOTALS
-========================= */
-function updateTotals() {
+function addToCart(name, price){
 
-    const fishTotal =
-        fishCart.reduce(
-            (sum,item)=>sum + item.price,
-            0
-        );
+    cart.push({
+        name:name,
+        price:Number(price)
+    });
 
-    const relicTotal =
-        relicCart.reduce(
-            (sum,item)=>sum + item.price,
-            0
-        );
+    renderCart();
 
-    const totalItems =
-        fishCart.length +
-        relicCart.length;
+    localStorage.setItem(
+        "zimzamCart",
+        JSON.stringify(cart)
+    );
 
-    const fishTotalEl =
-        document.getElementById("fish-total");
-
-    const relicTotalEl =
-        document.getElementById("relic-total");
-
-    const itemCountEl =
-        document.getElementById("item-count");
-
-    if(fishTotalEl){
-        fishTotalEl.textContent =
-        "$" + fishTotal.toFixed(2);
-    }
-
-    if(relicTotalEl){
-        relicTotalEl.textContent =
-        "S$ " + relicTotal.toLocaleString();
-    }
-
-    if(itemCountEl){
-        itemCountEl.textContent =
-        totalItems;
-    }
-
-    saveCart();
+    alert(name + " added to cart!");
 }
 
 function renderCart(){
 
-    const cartItems =
+    let html = "";
+    let total = 0;
+
+    cart.forEach(item=>{
+
+        html += `
+        <p>
+            ${item.name}
+            - $${item.price}
+        </p>
+        `;
+
+        total += item.price;
+    });
+
+    const items =
     document.getElementById("cart-items");
 
-    if(!cartItems) return;
+    const totalText =
+    document.getElementById("cart-total");
 
-    let html = "";
+    const count =
+    document.getElementById("cart-count");
 
-    fishCart.forEach(item=>{
-        html += `
-        <div>
-        🐟 ${item.name}
-        ($${item.price})
-        </div>
-        `;
-    });
+    if(items){
+        items.innerHTML = html;
+    }
 
-    relicCart.forEach(item=>{
-        html += `
-        <div>
-        🔮 ${item.name}
-        (S$ ${item.price})
-        </div>
-        `;
-    });
+    if(totalText){
+        totalText.innerText =
+        total.toFixed(2);
+    }
 
-    cartItems.innerHTML = html;
-}
-renderCart();
-addFish()
-addRelic()
-loadCart()
-clearCart()
-
-/* =========================
-   ADD FISH
-========================= */
-function addFish(name, price) {
-
-    fishCart.push({
-        name,
-        price: Number(price)
-    });
-
-    updateTotals();
-
-    alert("🐟 " + name + " added to cart!");
+    if(count){
+        count.innerText =
+        cart.length;
+    }
 }
 
-/* =========================
-   ADD RELIC
-========================= */
-function addRelic(name, price) {
+function checkout(){
 
-    relicCart.push({
-        name,
-        price: Number(price)
-    });
+    if(cart.length === 0){
 
-    updateTotals();
-
-    alert("🔮 " + name + " added to cart!");
-}
-
-/* =========================
-   SAVE CART
-========================= */
-function saveCart() {
-
-    localStorage.setItem(
-        "fishCart",
-        JSON.stringify(fishCart)
-    );
-
-    localStorage.setItem(
-        "relicCart",
-        JSON.stringify(relicCart)
-    );
-}
-
-/* =========================
-   LOAD CART
-========================= */
-function loadCart() {
-
-    fishCart =
-        JSON.parse(
-            localStorage.getItem("fishCart")
-        ) || [];
-
-    relicCart =
-        JSON.parse(
-            localStorage.getItem("relicCart")
-        ) || [];
-
-    updateTotals();
-}
-
-/* =========================
-   CHECKOUT WHATSAPP
-========================= */
-function checkoutCart() {
-
-    if (
-        fishCart.length === 0 &&
-        relicCart.length === 0
-    ) {
-        alert("Cart is empty!");
+        alert("Cart is empty");
         return;
     }
 
-    let fishTotal = 0;
-    let relicTotal = 0;
+    let total = 0;
 
-    let message =
-`🎣 ZIMZAM TRADING FISCH
+    let text =
+`Hello Zimzam Trading
+
+I want to order:
 
 `;
 
-    if (fishCart.length > 0) {
+    cart.forEach(item=>{
 
-        message += "🐟 FISH ITEMS\n";
+        text +=
+`• ${item.name} - $${item.price}
+`;
 
-        fishCart.forEach(item => {
+        total += item.price;
+    });
 
-            message +=
-                `• ${item.name} ($${item.price})\n`;
+    text +=
+`
+Total = $${total.toFixed(2)}
 
-            fishTotal += item.price;
-        });
-
-        message += "\n";
-    }
-
-    if (relicCart.length > 0) {
-
-        message += "🔮 RELICS\n";
-
-        relicCart.forEach(item => {
-
-            message +=
-                `• ${item.name} (S$ ${item.price})\n`;
-
-            relicTotal += item.price;
-        });
-
-        message += "\n";
-    }
-
-    message +=
-`━━━━━━━━━━━━━━
-
-💵 Fish Total:
-$${fishTotal.toFixed(2)}
-
-💰 Relic Total:
-S$ ${relicTotal.toLocaleString()}
-
-━━━━━━━━━━━━━━
-
-🎮 Roblox Username:
-...
-
-💬 Discord Username:
-...
-
-Thank You 🙏`;
+Thank you.
+`;
 
     window.open(
-        "https://wa.me/628881010901?text=" +
-        encodeURIComponent(message),
+        `https://wa.me/628881010901?text=${encodeURIComponent(text)}`,
         "_blank"
     );
 }
 
-/* =========================
-   CLEAR CART
-========================= */
-function clearCart() {
+window.onload = function(){
 
-    fishCart = [];
-    relicCart = [];
+    const saved =
+    localStorage.getItem("zimzamCart");
 
-    localStorage.removeItem("fishCart");
-    localStorage.removeItem("relicCart");
+    if(saved){
 
-    updateTotals();
+        cart =
+        JSON.parse(saved);
 
-    alert("Cart cleared!");
-}
-
-/* =========================
-   PAGE LOAD
-========================= */
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-        loadCart();
-        updateTotals();
+        renderCart();
     }
-);
-
-</script>
+};
