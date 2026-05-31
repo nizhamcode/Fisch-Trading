@@ -4,6 +4,32 @@
 let fishCart = [];
 let relicCart = [];
 
+function addFish(name, price){
+
+    fishCart.push({
+        name,
+        price
+    });
+
+    updateCart();
+
+    alert(`🐟 ${name} added to cart`);
+}
+
+function addRelic(name, price){
+
+    relicCart.push({
+        name,
+        price
+    });
+
+    updateCart();
+
+    alert(`🔮 ${name} added to cart`);
+}
+
+
+
 function updateTotals(){
 
     let fishTotal = 0;
@@ -185,6 +211,13 @@ function renderCart(){
         cart.length;
     }
 }
+
+const totalItems =
+fishCart.length +
+relicCart.length;
+
+document.getElementById("item-count").innerText =
+totalItems;
 
 function checkout(){
 
