@@ -1,4 +1,131 @@
 
+<script>
+
+let fishCart = [];
+let relicCart = [];
+
+function updateTotals(){
+
+    let fishTotal = 0;
+    let relicTotal = 0;
+
+    fishCart.forEach(item=>{
+        fishTotal += item.price;
+    });
+
+    relicCart.forEach(item=>{
+        relicTotal += item.price;
+    });
+
+    document.getElementById("fish-total")
+    .innerText =
+    "$" + fishTotal.toFixed(2);
+
+    document.getElementById("relic-total")
+    .innerText =
+    "S$ " + relicTotal.toLocaleString();
+
+    document.getElementById("item-count")
+    .innerText =
+    fishCart.length + relicCart.length;
+}
+
+function addFish(name,price){
+
+    fishCart.push({
+        name:name,
+        price:price
+    });
+
+    updateTotals();
+
+    alert(name + " added!");
+}
+
+function addRelic(name,price){
+
+    relicCart.push({
+        name:name,
+        price:price
+    });
+
+    updateTotals();
+
+    alert(name + " added!");
+}
+
+</script>
+
+	<button onclick="checkoutCart()">
+📱 Checkout
+</button>
+
+	<script>
+
+function checkoutCart(){
+
+let message =
+"🎣 ZIMZAM TRADING FISCH\n\n";
+
+if(fishCart.length){
+
+message +=
+"🐟 FISH ITEMS\n";
+
+fishCart.forEach(item=>{
+
+message +=
+"- " + item.name +
+" ($" + item.price + ")\n";
+
+});
+
+message += "\n";
+}
+
+if(relicCart.length){
+
+message +=
+"🔮 RELICS\n";
+
+relicCart.forEach(item=>{
+
+message +=
+"- " + item.name +
+" (S$ " + item.price + ")\n";
+
+});
+
+message += "\n";
+}
+
+let fishTotal = 0;
+let relicTotal = 0;
+
+fishCart.forEach(i=>fishTotal+=i.price);
+relicCart.forEach(i=>relicTotal+=i.price);
+
+message +=
+"━━━━━━━━━━━━━━\n";
+
+message +=
+"💵 Fish Total: $" +
+fishTotal.toFixed(2) +
+"\n";
+
+message +=
+"💰 Relic Total: S$ " +
+relicTotal.toLocaleString();
+
+window.open(
+"https://wa.me/628XXXXXXXXXX?text="
++ encodeURIComponent(message)
+);
+
+}
+
+</script>
+
 let cart = [];
 
 function addToCart(name, price){
