@@ -20,43 +20,71 @@ function addToCart(name, price){
 
 function renderCart(){
 
-    let html = "";
-    let total = 0;
+const cartItems =
+document.getElementById("cart-items");
 
-    cart.forEach(item=>{
+if(!cartItems) return;
 
-        html += `
-        <p>
-            ${item.name}
-            - $${item.price}
-        </p>
-        `;
+let html = "";
 
-        total += item.price;
-    });
+fishCart.forEach((item,index)=>{
 
-    const items =
-    document.getElementById("cart-items");
+html += `
+<div class="cart-item">
 
-    const totalText =
-    document.getElementById("cart-total");
+<div>
+🐟 ${item.name}
+<br>
+$${item.price}
+</div>
 
-    const count =
-    document.getElementById("cart-count");
+<button
+onclick="removeFish(${index})">
 
-    if(items){
-        items.innerHTML = html;
-    }
+❌
 
-    if(totalText){
-        totalText.innerText =
-        total.toFixed(2);
-    }
+</button>
 
-    if(count){
-        count.innerText =
-        cart.length;
-    }
+</div>
+`;
+});
+
+relicCart.forEach((item,index)=>{
+
+html += `
+<div class="cart-item">
+
+<div>
+🔮 ${item.name}
+<br>
+S$ ${item.price}
+</div>
+
+<button
+onclick="removeRelic(${index})">
+
+❌
+
+</button>
+
+</div>
+`;
+});
+
+if(
+fishCart.length===0 &&
+relicCart.length===0
+){
+
+html=
+`
+<p class="empty-cart">
+Cart is empty
+</p>
+`;
+}
+
+cartItems.innerHTML = html;
 }
 
 function checkout(){
