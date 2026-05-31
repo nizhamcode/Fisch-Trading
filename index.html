@@ -3,453 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="https://fischipedia.org/favicon.ico">
 
 <title>Zimzam Trading Fisch</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#0F172A;
-    color:white;
-    line-height:1.6;
-}
-
-/* PAYMENT BUTTON */
-
-.buy-btn{
-    display:block;
-    margin-top:15px;
-    padding:10px;
-
-    background:#22C55E;
-    color:white;
-
-    text-decoration:none;
-    text-align:center;
-
-    border-radius:10px;
-
-    font-weight:bold;
-
-    transition:.3s;
-}
-
-.buy-btn:hover{
-    background:#16A34A;
-    transform:translateY(-3px);
-}
-
-/* HEADER */
-header{
-    background:
-        linear-gradient(
-            rgba(0,0,0,.5),
-            rgba(0,0,0,.5)
-        ),
-        url("images/header-bg.png");
-
-    background-size: cover;
-    background-position: center;
-
-    color:white;
-    text-align:center;
-
-    padding:70px 20px;
-}
-
-	header h1{
-    font-size:52px;
-    font-weight:900;
-    letter-spacing:2px;
-
-    color:#E0F2FE;
-
-    text-shadow:
-        0 0 5px #38BDF8,
-        0 0 10px #38BDF8,
-        0 0 20px #38BDF8,
-        0 0 40px #0EA5E9,
-        0 0 80px #0284C7;
-
-    animation:pulseGlow 1.8s infinite alternate;
-}
-
-@keyframes pulseGlow{
-
-    0%{
-        transform:scale(1);
-    }
-
-    100%{
-        transform:scale(1.03);
-    }
-
-}
-
-	header h1::after{
-
-    content:"";
-
-    display:block;
-
-    width:250px;
-    height:3px;
-
-    margin:10px auto;
-
-    background:#38BDF8;
-
-    box-shadow:
-        0 0 10px #38BDF8,
-        0 0 20px #38BDF8,
-        0 0 30px #38BDF8;
-
-}
-
-<div class="cart-icon">
-    🛒 Cart (<span id="cart-count">0</span>)
-</div>
-
-
-header h1{
-    color:#38BDF8;
-
-    text-shadow:
-        0 0 10px #38BDF8,
-        0 0 20px #38BDF8,
-        0 0 40px #38BDF8;
-
-    margin-bottom:10px;
-}
-
-nav a{
-    color:#FFD700;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-nav a:hover{
-    color:white;
-}
-
-/* SECTION */
-section{
-    padding:30px 20px;
-}
-
-section h2{
-    margin-bottom:15px;
-    color:#38BDF8;
-}
-
-/* INFO BOX */
-.info-box{
-    background:#1E293B;
-    padding:20px;
-    border-radius:15px;
-    max-width:900px;
-    margin:auto;
-}
-
-/* GRID */
-.relic-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-    gap:25px;
-    margin-top:20px;
-}
-.secret-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-    gap:25px;
-    margin-top:20px;
-}
-
-/* CARD */
-.relic-card{
-    background:#1E293B;
-    border:2px solid #334155;
-    border-radius:15px;
-    padding:20px;
-    text-align:center;
-    transition:all .3s ease;
-}
-
-.relic-card:hover{
-    transform:translateY(-8px);
-    border-color:#38BDF8;
-    box-shadow:0 0 20px rgba(56,189,248,.5);
-}
-
-.relic-card img{
-    width:120px;
-    height:120px;
-    object-fit:contain;
-    display:block;
-    margin:0 auto 15px;
-}
-
-.relic-card h3{
-    color:#38BDF8;
-    margin-bottom:10px;
-}
-
-.rarity{
-    color:#CBD5E1;
-    font-size:14px;
-    margin-bottom:10px;
-}
-
-.price{
-    color:#FFD700;
-    font-size:24px;
-    font-weight:bold;
-    margin:10px 0;
-}
-
-.add-cart{
-
-width:100%;
-
-padding:12px;
-
-margin-top:10px;
-
-background:#3B82F6;
-
-color:white;
-
-border:none;
-
-border-radius:10px;
-
-cursor:pointer;
-
-font-weight:bold;
-}
-
-.add-cart:hover{
-background:#2563EB;
-}
-
-#cart-panel{
-
-position:fixed;
-
-right:20px;
-bottom:20px;
-
-width:300px;
-
-background:#1E293B;
-
-padding:20px;
-
-border-radius:15px;
-
-border:2px solid #38BDF8;
-
-max-height:400px;
-
-overflow:auto;
-
-z-index:999;
-}
-
-
-.add-cart{
-    width:100%;
-    margin-top:12px;
-    padding:12px;
-
-    background:#2563EB;
-    color:white;
-
-    border:none;
-    border-radius:10px;
-
-    font-weight:bold;
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.add-cart:hover{
-    background:#1D4ED8;
-    transform:translateY(-2px);
-}
-
-.stock1{
-    display:inline-block;
-    background:#16A34A;
-    color:white;
-    padding:6px 12px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-.stock2{
-    display:inline-block;
-    background:red;
-    color:white;
-    padding:6px 12px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.secret-section {
-    padding: 40px 20px;
-}
-
-.secret-title {
-    text-align: center;
-    color: #C084FC;
-    font-size: 36px;
-    text-shadow: 0 0 20px #C084FC;
-}
-
-.secret-subtitle {
-    text-align: center;
-    color: #CBD5E1;
-    margin-bottom: 35px;
-}
-
-.secret-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-    gap: 25px;
-}
-
-.secret-card {
-    position: relative;
-    background: linear-gradient(
-        180deg,
-        #1E293B,
-        #0F172A
-    );
-
-    border: 2px solid #7C3AED;
-    border-radius: 18px;
-
-    padding: 20px;
-    text-align: center;
-
-    overflow: hidden;
-
-    transition: .35s;
-}
-
-.secret-card:hover {
-    transform: translateY(-10px);
-
-    box-shadow:
-    0 0 20px #7C3AED,
-    0 0 40px rgba(124,58,237,.6);
-}
-
-.secret-card img {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-    margin-bottom: 15px;
-}
-
-.secret-card h3 {
-    color: white;
-    margin-bottom: 10px;
-}
-
-.badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-
-    background: #7C3AED;
-    color: white;
-
-    padding: 5px 10px;
-    border-radius: 20px;
-
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.rarity {
-    color: #C084FC;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.price {
-    color: #FFD700;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.stock {
-    margin-top: 10px;
-
-    display: inline-block;
-
-    background: #16A34A;
-
-    color: white;
-
-    padding: 6px 12px;
-    border-radius: 20px;
-
-    font-size: 13px;
-}
-
-.collector {
-    border-color: #F59E0B;
-}
-
-.collector:hover {
-    box-shadow:
-    0 0 20px #F59E0B,
-    0 0 40px rgba(245,158,11,.6);
-}
-
-.extinct {
-    border-color: #EF4444;
-}
-
-.extinct:hover {
-    box-shadow:
-    0 0 20px #EF4444,
-    0 0 40px rgba(239,68,68,.6);
-}
-/* FOOTER */
-footer{
-    background:#020617;
-    text-align:center;
-    padding:20px;
-    margin-top:30px;
-    border-top:3px solid #38BDF8;
-}
-
-@media(max-width:600px){
-    .relic-card img{
-        width:90px;
-        height:90px;
-    }
-
-    .price{
-        font-size:20px;
-    }
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+
 
 <header>
     <h1>🎣 Welcome to Zimzam Trading Fisch</h1>
@@ -467,6 +28,8 @@ footer{
     </nav>
 </header>
 
+<body>
+
 <div id="cart-panel">
 
 <h2>🛒 Shopping Cart</h2>
@@ -483,84 +46,6 @@ $<span id="cart-total">0</span>
 </button>
 
 </div>
-
-<script>
-
-let cart=[];
-
-function addToCart(name,price){
-
-cart.push({
-name:name,
-price:Number(price)
-});
-
-renderCart();
-
-}
-
-function renderCart(){
-
-let html="";
-
-let total=0;
-
-cart.forEach(item=>{
-
-html += `
-<p>
-${item.name}
- - $${item.price}
-</p>
-`;
-
-total += item.price;
-
-});
-
-document.getElementById("cart-items").innerHTML =
-html;
-
-document.getElementById("cart-total").innerText =
-total.toFixed(2);
-
-document.getElementById("cart-count").innerText =
-cart.length;
-
-}
-
-function checkout(){
-
-if(cart.length===0){
-
-alert("Cart is empty");
-
-return;
-}
-
-let text=
-"Hello Zimzam Trading%0A%0A";
-
-let total=0;
-
-cart.forEach(item=>{
-
-text +=
-`${item.name} - $${item.price}%0A`;
-
-total += item.price;
-
-});
-
-text += `%0ATotal = $${total}`;
-
-window.open(
-`https://wa.me/628881010901?text=${text}`
-);
-
-}
-
-</script>
 
 <section>
     <div class="info-box">
@@ -652,7 +137,7 @@ onclick="addToCart('Fossilized Plesiosaur',7)">
         <div class="secret-card">
             <div class="badge">SECRET</div>
 
-            <img src="images/Scylla.png" alt="Scylla">
+            <img src="images/scylla.png" alt="Scylla">
 
             <h3>Wrath Scylla</h3>
 
@@ -672,7 +157,7 @@ onclick="addToCart('Scylla',5)">
         <div class="secret-card collector">
             <div class="badge">GEMSTONE</div>
 
-            <img src="images/Moonstone.png" alt="for crafting">
+            <img src="images/moonstone.png" alt="for crafting">
 
             <h3>Moonstone</h3>
 
@@ -683,7 +168,7 @@ onclick="addToCart('Scylla',5)">
             <div class="stock2">X Not Available</div>
 
 <button class="add-cart"
-onclick="addToCart('Moonstone',1,99)">
+onclick="addToCart('Moonstone',1.99)">
 🛒 Add To Cart
 </button>
 
@@ -692,7 +177,7 @@ onclick="addToCart('Moonstone',1,99)">
         <div class="secret-card collector">
             <div class="badge">LIMITED</div>
 
-            <img src="images/Jurassic_Mosasaurus.png" alt="Jurassic Mosasaurus">
+            <img src="images/jurassic_mosasaurus.png" alt="Jurassic Mosasaurus">
 
             <h3>Jurassic Mosasaurus</h3>
 
@@ -732,7 +217,7 @@ onclick="addToCart('Redlip Batfish',19.99)">
         <div class="secret-card extinct">
             <div class="badge">EXTINCT</div>
 
-            <img src="images/Apex_Leviathan.png"
+            <img src="images/apex_leviathan.png"
                  alt="Apex leviathan">
 
             <h3>Apex Leviathan</h3>
@@ -772,7 +257,7 @@ onclick="addToCart('Apex Leviathan',39)">
             <div class="price">S$ 1</div>
             <div class="stock1">✓ Available</div>
 	<button class="add-cart"
-onclick="addToCart('Enchant Relic',1 scrip)">
+onclick="addToCart('Enchant Relic','1 scrip')">
 🛒 Add To Cart
 </button>
         </div>
@@ -784,7 +269,7 @@ onclick="addToCart('Enchant Relic',1 scrip)">
             <div class="price">S$ 20</div>
             <div class="stock1">✓ Available</div>
 	<button class="add-cart"
-onclick="addToCart('Exalted Relic',20 scrip)">
+onclick="addToCart('Exalted Relic','20 Scrip')">
 🛒 Add To Cart
 </button>
 
@@ -797,7 +282,7 @@ onclick="addToCart('Exalted Relic',20 scrip)">
             <div class="price">S$ 100</div>
             <div class="stock1">✓ Available</div>
 <button class="add-cart"
-onclick="addToCart('Cosmic Relic',100 scrip)">
+onclick="addToCart('Cosmic Relic','100 scrip')">
 🛒 Add To Cart
 </button>
         </div>
@@ -809,7 +294,7 @@ onclick="addToCart('Cosmic Relic',100 scrip)">
             <div class="price">S$ 5</div>
             <div class="stock1">✓ Available</div>
 <button class="add-cart"
-onclick="addToCart('Twisted Relic',5 scrip)">
+onclick="addToCart('Twisted Relic','5 scrip')">
 🛒 Add To Cart
 </button>
         </div>
@@ -821,7 +306,7 @@ onclick="addToCart('Twisted Relic',5 scrip)">
             <div class="price">S$ 4,999</div>
             <div class="stock1">✓ Available</div>
 <button class="add-cart"
-onclick="addToCart('Sovereign Relic',4999 )">
+onclick="addToCart('Sovereign Relic','4999 scrip')">
 🛒 Add To Cart
         </div>
 
@@ -832,25 +317,25 @@ onclick="addToCart('Sovereign Relic',4999 )">
             <div class="price">S$ 100</div>
             <div class="stock1">✓ Available</div>
 <button class="add-cart"
-onclick="addToCart('Song of the Deep',100 )">
+onclick="addToCart('Song of the Deep','100 scrip')">
 🛒 Add To Cart
 </button>
         </div>
 
         <div class="relic-card">
-            <img src="images/Invincible_Relic.png" alt="Invincible Relic">
+            <img src="../images/invincible_Relic.png" alt="Invincible Relic">
             <h3>🛡️ Invincible Relic</h3>
             <div class="rarity">Quest Relic</div>
             <div class="price">S$ 250</div>
             <div class="stock2">X Not Available</div>
-			<button class="add-cart"
-onclick="addToCart('Invincible Relic',250 )">
+            <button class="add-cart"
+onclick="addToCart('invincible_relic',250)">
 🛒 Add To Cart
 </button>
         </div>
 
         <div class="relic-card">
-            <img src="images/Eerie_Relic.png" alt="Eerie Relic">
+            <img src="../images/eerie_relic.png" alt="Eerie Relic">
             <h3>👻 Eerie Relic</h3>
             <div class="rarity">Event</div>
             <div class="price">S$ 3999</div>
@@ -858,7 +343,7 @@ onclick="addToCart('Invincible Relic',250 )">
         </div>
 
         <div class="relic-card">
-            <img src="images/Spooky_Relic.png" alt="Spooky Relic">
+            <img src="../images/spooky_relic.png" alt="Spooky Relic">
             <h3>🎃 Spooky Relic</h3>
             <div class="rarity">Event</div>
             <div class="price">S$ 3999</div>
@@ -866,7 +351,7 @@ onclick="addToCart('Invincible Relic',250 )">
         </div>
 
         <div class="relic-card">
-            <img src="images/Frightful_Relic.png" alt="Frightful Relic">
+            <img src="../images/frightful_relic.png" alt="Frightful Relic">
             <h3>☠️ Frightful Relic</h3>
             <div class="rarity">Event</div>
             <div class="price">S$ 4000</div>
@@ -874,7 +359,7 @@ onclick="addToCart('Invincible Relic',250 )">
         </div>
 
         <div class="relic-card">
-            <img src="images/Festive_Relic.png" alt="Festive Relic">
+            <img src="../images/festive_relic.png" alt="Festive Relic">
             <h3>🎄 Festive Relic</h3>
             <div class="rarity">Holiday</div>
             <div class="price">S$ 500</div>
@@ -882,7 +367,7 @@ onclick="addToCart('Invincible Relic',250 )">
         </div>
 
         <div class="relic-card">
-            <img src="images/Santa's_Relic.png" alt="Santa Relic">
+            <img src="../images/santa's_relic.png" alt="Santa Relic">
             <h3>🎅 Santa Relic</h3>
             <div class="rarity">Holiday</div>
             <div class="price">S$ 5000</div>
@@ -890,7 +375,7 @@ onclick="addToCart('Invincible Relic',250 )">
         </div>
 
         <div class="relic-card">
-            <img src="images/Cupid_Relic.png" alt="Cupid Relic">
+            <img src="../images/cupid_relic.png" alt="Cupid Relic">
             <h3>💘 Cupid Relic</h3>
             <div class="rarity">Valentine</div>
             <div class="price">S$ 600</div>
@@ -898,7 +383,7 @@ onclick="addToCart('Invincible Relic',250 )">
         </div>
 
         <div class="relic-card">
-            <img src="images/Valentine's_Relic.png" alt="Valentines Relic">
+            <img src="images/valentine's_relic.png" alt="Valentines Relic">
             <h3>❤️ Valentine's Relic</h3>
             <div class="rarity">Valentine</div>
             <div class="price">S$ 1000</div>
@@ -908,33 +393,53 @@ onclick="addToCart('Invincible Relic',250 )">
     </div>
 
 </section>
-<script>
-let cart = [];
 
-function addToCart(name, price){
 
-    cart.push({
-        name:name,
-        price:price
-    });
+<footer class="footer">
 
-    alert(name + " added to cart!");
+    <h3>🎣 Zimzam Trading Fisch</h3>
 
-    console.log(cart);
-}
-</script>
-<section>
-    <div class="info-box">
-        <h2>📞 Contact</h2>
+    <p>
+        Trusted Trading for Fisch Relics, Secret Fish,
+        Exotic Collections, and Rare Items.
+    </p>
 
-        <p>Discord: ZimzamGame</p>
-        <p>Roblox: zimzamgame</p>
+    <div class="footer-links">
+
+        <a href="https://github.com/nizhamcode"
+           target="_blank">
+           🌐 Website
+        </a>
+
+        <a href="https://www.roblox.com/users/1269671348/profile"
+           target="_blank">
+           🎮 Roblox
+        </a>
+
+        <a href="https://www.youtube.com/@zimzamgame"
+           target="_blank">
+           📺 YouTube
+        </a>
+
+        <a href="https://discord.gg/VEbvwX3R"
+           target="_blank">
+           💬 Discord
+        </a>
+
+        <a href="https://wa.me/628881010901"
+           target="_blank">
+           📱 WhatsApp
+        </a>
+
     </div>
-</section>
 
-<footer>
-    <p>© 2026 Zimzam Trading Fisch</p>
+    <div class="footer-bottom">
+        © 2026 Zimzam Trading Fisch • All Rights Reserved
+    </div>
+
 </footer>
+
+<script src="js/script.js"></script>
 
 </body>
 </html>
