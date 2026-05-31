@@ -8,42 +8,45 @@ let relicCart = [];
 ========================= */
 function updateTotals() {
 
-    const fishTotal = fishCart.reduce(
-        (sum, item) => sum + item.price,
-        0
-    );
+    const fishTotal =
+        fishCart.reduce(
+            (sum,item)=>sum + item.price,
+            0
+        );
 
-    const relicTotal = relicCart.reduce(
-        (sum, item) => sum + item.price,
-        0
-    );
+    const relicTotal =
+        relicCart.reduce(
+            (sum,item)=>sum + item.price,
+            0
+        );
 
     const totalItems =
         fishCart.length +
         relicCart.length;
 
-   const fishTotalEl =
-document.getElementById("fish-total");
+    const fishTotalEl =
+        document.getElementById("fish-total");
 
-if(fishTotalEl){
-    fishTotalEl.textContent =
-    "$" + fishTotal.toFixed(2);
-}
+    const relicTotalEl =
+        document.getElementById("relic-total");
 
- const relicTotalEl =
-document.getElementById("relic-total");
+    const itemCountEl =
+        document.getElementById("item-count");
 
-if(relicTotalEl){
-    relicTotalEl.textContent =
-    "$" + relicTotal.toFixed(2);
-}
-    const itemTotalEl =
-document.getElementById("item-total");
+    if(fishTotalEl){
+        fishTotalEl.textContent =
+        "$" + fishTotal.toFixed(2);
+    }
 
-if(itemTotalEl){
-    itemTotalEl.textContent =
-    "$" + itemTotal.toFixed(2);
-}
+    if(relicTotalEl){
+        relicTotalEl.textContent =
+        "S$ " + relicTotal.toLocaleString();
+    }
+
+    if(itemCountEl){
+        itemCountEl.textContent =
+        totalItems;
+    }
 
     saveCart();
 }
