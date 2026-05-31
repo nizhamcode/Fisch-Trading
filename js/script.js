@@ -175,26 +175,41 @@ function removeRelic(index) {
 
 function updateTotals() {
 
-    let total = 0;
+    let fishTotal = 0;
+    let relicTotal = 0;
 
     fishCart.forEach(item => {
-        total += item.price;
+        fishTotal += Number(item.price);
     });
 
     relicCart.forEach(item => {
-        total += item.price;
+        relicTotal += Number(item.price);
     });
 
-    const totalElement =
-    document.getElementById("cart-total");
+    const fishElement =
+    document.getElementById("fish-total");
 
-    if (totalElement) {
+    const relicElement =
+    document.getElementById("relic-total");
 
-        totalElement.textContent =
-        "$" + total.toFixed(2);
+    const itemElement =
+    document.getElementById("item-count");
+
+    if(fishElement){
+        fishElement.textContent =
+        "$" + fishTotal.toFixed(2);
+    }
+
+    if(relicElement){
+        relicElement.textContent =
+        "S$ " + relicTotal.toLocaleString();
+    }
+
+    if(itemElement){
+        itemElement.textContent =
+        fishCart.length + relicCart.length;
     }
 }
-
 // ======================
 // OPEN/CLOSE CART
 // ======================
