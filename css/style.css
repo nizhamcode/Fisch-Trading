@@ -255,6 +255,34 @@ overflow:auto;
 z-index:999;
 }
 
+#cart-summary{
+
+position:fixed;
+
+right:20px;
+bottom:20px;
+
+width:280px;
+
+background:#1E293B;
+
+padding:20px;
+
+border-radius:15px;
+
+border:2px solid #38BDF8;
+
+box-shadow:
+0 0 20px rgba(56,189,248,.3);
+
+z-index:999;
+}
+
+#cart-summary h2{
+    color:#38BDF8;
+    margin-bottom:15px;
+}
+
 
 .add-cart{
     width:100%;
