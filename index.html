@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+
 
 
 <header>
@@ -28,34 +28,21 @@
     </nav>
 </header>
 
+<body>
+
+<div id="cart-panel">
+
+<h2>🛒 Shopping Cart</h2>
+
 <div id="cart-items"></div>
-	<h2>🛒 Shopping Cart</h2>
-	
-<div class="cart-summary">
 
-    <h2>🛒 Shopping Cart</h2>
+<h3>
+Total:
+$<span id="cart-total">0</span>
+</h3>
 
-    <p>
-        🐟 Fish Total:
-        <span id="fish-total">$0.00</span>
-    </p>
-
-    <p>
-        🔮 Relic Total:
-        <span id="relic-total">S$ 0</span>
-    </p>
-
-    <p>
-        📦 Total Items:
-        <span id="item-count">0</span>
-    </p>
-
- <button class="checkout-btn" onclick="checkoutCart()">
+<button onclick="checkout()">
 📱 Checkout WhatsApp
-</button>
-
-<button class="clear-btn" onclick="clearCart()">
-🗑️ Clear Cart
 </button>
 
 </div>
@@ -64,23 +51,16 @@
     <div class="info-box">
         <h2>🐟 About Trading</h2>
 
-      <p>
--IND: Tempat trading Relics, Fish, dan item koleksi langka dari game Fisch.
-</p>
-
-<p>
--ENG: A place to trade Relics, Fish, and rare collectibles from the Fisch game.
-</p>
-
-<p>
-Currency accepted:
-</p>
-
-<ul>
-<li>S$ = Shady Scrip (In-game Currency)</li>
-<li>USD = United States Dollar</li>
-<li>IDR = Indonesian Rupiah</li>
-</ul>
+        <p>
+           -IND: Tempat trading Relics, Fish, dan item koleksi langka dari game Fisch.
+            Semua item ditampilkan dalam katalog yang mudah dibaca dan siap diperbarui.
+	   <p>-ENG: A place to trade Relics, Fish, and rare collectibles from the Fisch game.
+	    All items are displayed in an easy-to-read, readily updated catalog.
+	<p>-Currency that accepted there are=
+        <p> S$= Shady Scrip (In-game Currency)
+	<p> USD=USA Currency (Real-Life Currency)
+	<p> IDR=Indonesian Currency (Real-life Currency)
+        </p>
     </div>
 </section>
 
@@ -105,15 +85,11 @@ Currency accepted:
 
             <div class="rarity">⭐⭐⭐⭐⭐ Secret</div>
 
-            <div class="price">S$ 499 OR 3$ USD</div>
+            <div class="price">S$ 4,999 OR 4,99$ USD</div>
 
             <div class="stock">✓ Available</div>
-		<button
-class="add-cart"
-onclick="addFish(
-'Awakened Omnithal',
-3
-)">
+	    <button class="add-cart"
+onclick="addToCart('Awakened Omnithal',4.99)">
 🛒 Add To Cart
 </button>
 	
@@ -128,16 +104,12 @@ onclick="addFish(
 
             <div class="rarity">⭐⭐⭐⭐ Exotic</div>
 
-            <div class="price">S$ 100 OR 1$ USD</div>
+            <div class="price">S$ 1,000 OR 1,99$ USD</div>
 
             <div class="stock">✓ Available</div>
 
-<button
-class="add-cart"
-onclick="addFish(
-'Omnithal',
-1
-)">
+   	<button class="add-cart"
+onclick="addToCart('Omnithal',1.99)">
 🛒 Add To Cart
 </button>
         </div>
@@ -151,16 +123,12 @@ onclick="addFish(
 
             <div class="rarity">⭐⭐⭐⭐ Exotic</div>
 
-            <div class="price">S$ 700 OR 3.50$ USD</div>
+            <div class="price">S$ 7,000 OR 7$ USD</div>
 
             <div class="stock">✓ Available(Soon)</div>
 
-	<button
-class="add-cart"
-onclick="addFish(
-'Fossilized Plesiosaur',
-3.50
-)">
+		<button class="add-cart"
+onclick="addToCart('Fossilized Plesiosaur',7)">
 🛒 Add To Cart
 </button>
 
@@ -175,16 +143,12 @@ onclick="addFish(
 
             <div class="rarity">⭐⭐⭐⭐⭐ Secret</div>
 
-            <div class="price">S$ 500 OR 5$ USD</div>
+            <div class="price">S$ 5,000 OR 5$ USD</div>
 
             <div class="stock2">X Not Available</div>
 
-<button
-class="add-cart"
-onclick="addFish(
-'Scylla',
-5
-)">
+<button class="add-cart"
+onclick="addToCart('Scylla',5)">
 🛒 Add To Cart
 </button>
 
@@ -199,16 +163,12 @@ onclick="addFish(
 
             <div class="rarity">💎 Gemstone</div>
 
-            <div class="price">S$ 1,000 OR 1.99$ USD</div>
+            <div class="price">S$ 1,000 OR 1,99$ USD</div>
 
             <div class="stock2">X Not Available</div>
 
-<button
-class="add-cart"
-onclick="addFish(
-'Moonstone',
-1.99
-)">
+<button class="add-cart"
+onclick="addToCart('Moonstone',1.99)">
 🛒 Add To Cart
 </button>
 
@@ -226,14 +186,12 @@ onclick="addFish(
             <div class="price">S$ 39,000 OR 30$ USD</div>
 
             <div class="stock">💎 Available(1 left)</div>
-<button
-class="add-cart"
-onclick="addFish(
-'Jurassic Mosasaurus',
-30
-)">
+
+<button class="add-cart"
+onclick="addToCart('Jurassic Mosasaurus',30)">
 🛒 Add To Cart
 </button>
+
         </div>
 
         <div class="secret-card collector">
@@ -245,16 +203,12 @@ onclick="addFish(
 
             <div class="rarity">💎 Limited</div>
 
-            <div class="price">S$ 4,100 OR 19$ USD</div>
+            <div class="price">S$ 4,100 OR 19,99$ USD</div>
 
             <div class="stock">💎 Available</div>
 
-<button
-class="add-cart"
-onclick="addFish(
-'Redlip Batfish',
-19
-)">
+<button class="add-cart"
+onclick="addToCart('Redlip Batfish',19.99)">
 🛒 Add To Cart
 </button>
 
@@ -280,12 +234,8 @@ onclick="addFish(
                 ⚠ One of the Rarest
 
             </div>
-<button
-class="add-cart"
-onclick="addFish(
-'Apex Leviathan',
-39
-)">
+<button class="add-cart"
+onclick="addToCart('Apex Leviathan',39)">
 🛒 Add To Cart
 </button>
         </div>
@@ -306,12 +256,8 @@ onclick="addFish(
             <div class="rarity">Relic</div>
             <div class="price">S$ 1</div>
             <div class="stock1">✓ Available</div>
-<button
-class="add-cart"
-onclick="addRelic(
-'Enchant Relic',
-1
-)">
+	<button class="add-cart"
+onclick="addToCart('Enchant Relic','1 scrip')">
 🛒 Add To Cart
 </button>
         </div>
@@ -322,12 +268,8 @@ onclick="addRelic(
             <div class="rarity">Relic</div>
             <div class="price">S$ 20</div>
             <div class="stock1">✓ Available</div>
-	<button
-class="add-cart"
-onclick="addRelic(
-'Exalted Relic',
-20
-)">
+	<button class="add-cart"
+onclick="addToCart('Exalted Relic','20 Scrip')">
 🛒 Add To Cart
 </button>
 
@@ -339,12 +281,8 @@ onclick="addRelic(
             <div class="rarity">Relic</div>
             <div class="price">S$ 100</div>
             <div class="stock1">✓ Available</div>
-<button
-class="add-cart"
-onclick="addRelic(
-'Cosmic Relic',
-100
-)">
+<button class="add-cart"
+onclick="addToCart('Cosmic Relic','100 scrip')">
 🛒 Add To Cart
 </button>
         </div>
@@ -355,12 +293,8 @@ onclick="addRelic(
             <div class="rarity">Relic</div>
             <div class="price">S$ 5</div>
             <div class="stock1">✓ Available</div>
-<button
-class="add-cart"
-onclick="addRelic(
-'Twisted Relic',
-5
-)">
+<button class="add-cart"
+onclick="addToCart('Twisted Relic','5 scrip')">
 🛒 Add To Cart
 </button>
         </div>
@@ -369,16 +303,11 @@ onclick="addRelic(
             <img src="images/Sovereign_Relic.png" alt="Sovereign Relic">
             <h3>👑 Sovereign Relic</h3>
             <div class="rarity">Relic</div>
-            <div class="price">S$ 4,500</div>
+            <div class="price">S$ 4,999</div>
             <div class="stock1">✓ Available</div>
-<button
-class="add-cart"
-onclick="addRelic(
-'Sovereign Relic',
-4.500
-)">
+<button class="add-cart"
+onclick="addToCart('Sovereign Relic','4999 scrip')">
 🛒 Add To Cart
-</button>
         </div>
 
         <div class="relic-card">
@@ -387,12 +316,8 @@ onclick="addRelic(
             <div class="rarity">Quest Relic</div>
             <div class="price">S$ 100</div>
             <div class="stock1">✓ Available</div>
-<button
-class="add-cart"
-onclick="addRelic(
-'Song of the Deep',
-100
-)">
+<button class="add-cart"
+onclick="addToCart('Song of the Deep','100 scrip')">
 🛒 Add To Cart
 </button>
         </div>
@@ -404,7 +329,7 @@ onclick="addRelic(
             <div class="price">S$ 250</div>
             <div class="stock2">X Not Available</div>
             <button class="add-cart"
-onclick="addRelic('Invincible Relic',250)">
+onclick="addToCart('invincible_relic',250)">
 🛒 Add To Cart
 </button>
         </div>
@@ -429,7 +354,7 @@ onclick="addRelic('Invincible Relic',250)">
             <img src="images/Frightful_Relic.png" alt="Frightful Relic">
             <h3>☠️ Frightful Relic</h3>
             <div class="rarity">Event</div>
-            <div class="price">S$ 3999</div>
+            <div class="price">S$ 4000</div>
             <div class="stock2">X Not Available</div>
         </div>
 
@@ -437,7 +362,7 @@ onclick="addRelic('Invincible Relic',250)">
             <img src="images/Festive_Relic.png" alt="Festive Relic">
             <h3>🎄 Festive Relic</h3>
             <div class="rarity">Holiday</div>
-            <div class="price">S$ 1000</div>
+            <div class="price">S$ 500</div>
             <div class="stock2">X Not Available</div>
         </div>
 
@@ -445,7 +370,7 @@ onclick="addRelic('Invincible Relic',250)">
             <img src="images/Santa's_Relic.png" alt="Santa Relic">
             <h3>🎅 Santa Relic</h3>
             <div class="rarity">Holiday</div>
-            <div class="price">S$ 50000</div>
+            <div class="price">S$ 5000</div>
             <div class="stock2">X Not Available</div>
         </div>
 
@@ -453,7 +378,7 @@ onclick="addRelic('Invincible Relic',250)">
             <img src="images/Cupid_Relic.png" alt="Cupid Relic">
             <h3>💘 Cupid Relic</h3>
             <div class="rarity">Valentine</div>
-            <div class="price">S$ 1000</div>
+            <div class="price">S$ 600</div>
             <div class="stock2">X Not Available</div>
         </div>
 
@@ -461,7 +386,7 @@ onclick="addRelic('Invincible Relic',250)">
             <img src="images/Valentine's_Relic.png" alt="Valentines Relic">
             <h3>❤️ Valentine's Relic</h3>
             <div class="rarity">Valentine</div>
-            <div class="price">S$ 2000</div>
+            <div class="price">S$ 1000</div>
             <div class="stock2">X Not Available</div>
         </div>
 
@@ -506,10 +431,6 @@ onclick="addRelic('Invincible Relic',250)">
            📱 WhatsApp
         </a>
 
-
-	<button onclick="checkoutCart()">
-📱 Checkout
-</button>	
     </div>
 
     <div class="footer-bottom">
@@ -517,7 +438,8 @@ onclick="addRelic('Invincible Relic',250)">
     </div>
 
 </footer>
-<script src="js/script.js" defer></script>
-	
+
+<script src="js/script.js"></script>
+
 </body>
 </html>
