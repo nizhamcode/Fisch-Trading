@@ -22,14 +22,28 @@ function updateTotals() {
         fishCart.length +
         relicCart.length;
 
-    document.getElementById("fish-total").textContent =
-        "$" + fishTotal.toFixed(2);
+   const fishTotalEl =
+document.getElementById("fish-total");
 
-    document.getElementById("relic-total").textContent =
-        "S$ " + relicTotal.toLocaleString();
+if(fishTotalEl){
+    fishTotalEl.textContent =
+    "$" + fishTotal.toFixed(2);
+}
 
-    document.getElementById("item-count").textContent =
-        totalItems;
+ const relicTotalEl =
+document.getElementById("relic-total");
+
+if(relicTotalEl){
+    relicTotalEl.textContent =
+    "$" + relicTotal.toFixed(2);
+}
+    const itemTotalEl =
+document.getElementById("item-total");
+
+if(itemTotalEl){
+    itemTotalEl.textContent =
+    "$" + itemTotal.toFixed(2);
+}
 
     saveCart();
 }
@@ -194,9 +208,12 @@ function clearCart() {
 /* =========================
    PAGE LOAD
 ========================= */
-window.addEventListener(
+document.addEventListener(
     "DOMContentLoaded",
-    loadCart
+    () => {
+        loadCart();
+        updateTotals();
+    }
 );
 
 </script>
