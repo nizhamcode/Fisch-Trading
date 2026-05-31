@@ -1,248 +1,202 @@
-
 <script>
 
 let fishCart = [];
 let relicCart = [];
 
+/* =========================
+   UPDATE TOTALS
+========================= */
+function updateTotals() {
 
-function updateTotals(){
+    const fishTotal = fishCart.reduce(
+        (sum, item) => sum + item.price,
+        0
+    );
+
+    const relicTotal = relicCart.reduce(
+        (sum, item) => sum + item.price,
+        0
+    );
+
+    const totalItems =
+        fishCart.length +
+        relicCart.length;
+
+    document.getElementById("fish-total").textContent =
+        "$" + fishTotal.toFixed(2);
+
+    document.getElementById("relic-total").textContent =
+        "S$ " + relicTotal.toLocaleString();
+
+    document.getElementById("item-count").textContent =
+        totalItems;
+
+    saveCart();
+}
+
+/* =========================
+   ADD FISH
+========================= */
+function addFish(name, price) {
+
+    fishCart.push({
+        name,
+        price: Number(price)
+    });
+
+    updateTotals();
+
+    alert("🐟 " + name + " added to cart!");
+}
+
+/* =========================
+   ADD RELIC
+========================= */
+function addRelic(name, price) {
+
+    relicCart.push({
+        name,
+        price: Number(price)
+    });
+
+    updateTotals();
+
+    alert("🔮 " + name + " added to cart!");
+}
+
+/* =========================
+   SAVE CART
+========================= */
+function saveCart() {
+
+    localStorage.setItem(
+        "fishCart",
+        JSON.stringify(fishCart)
+    );
+
+    localStorage.setItem(
+        "relicCart",
+        JSON.stringify(relicCart)
+    );
+}
+
+/* =========================
+   LOAD CART
+========================= */
+function loadCart() {
+
+    fishCart =
+        JSON.parse(
+            localStorage.getItem("fishCart")
+        ) || [];
+
+    relicCart =
+        JSON.parse(
+            localStorage.getItem("relicCart")
+        ) || [];
+
+    updateTotals();
+}
+
+/* =========================
+   CHECKOUT WHATSAPP
+========================= */
+function checkoutCart() {
+
+    if (
+        fishCart.length === 0 &&
+        relicCart.length === 0
+    ) {
+        alert("Cart is empty!");
+        return;
+    }
 
     let fishTotal = 0;
     let relicTotal = 0;
 
-    fishCart.forEach(item=>{
-        fishTotal += item.price;
-    });
-
-    relicCart.forEach(item=>{
-        relicTotal += item.price;
-    });
-
-    document.getElementById("fish-total")
-    .innerText =
-    "$" + fishTotal.toFixed(2);
-
-    document.getElementById("relic-total")
-    .innerText =
-    "S$ " + relicTotal.toLocaleString();
-
-    document.getElementById("item-count")
-    .innerText =
-    fishCart.length + relicCart.length;
-}
-
-function addFish(name,price){
-
-    fishCart.push({
-        name:name,
-        price:price
-    });
-
-    updateTotals();
-
-    alert(name + " added!");
-}
-
-function addRelic(name,price){
-
-    relicCart.push({
-        name:name,
-        price:price
-    });
-
-    updateTotals();
-
-    alert(name + " added!");
-}
-
-</script>
-
-	<button onclick="checkoutCart()">
-📱 Checkout
-</button>
-
-	<script>
-
-function checkoutCart(){
-
-let message =
-"🎣 ZIMZAM TRADING FISCH\n\n";
-
-if(fishCart.length){
-
-message +=
-"🐟 FISH ITEMS\n";
-
-fishCart.forEach(item=>{
-
-message +=
-"- " + item.name +
-" ($" + item.price + ")\n";
-
-});
-
-message += "\n";
-}
-
-if(relicCart.length){
-
-message +=
-"🔮 RELICS\n";
-
-relicCart.forEach(item=>{
-
-message +=
-"- " + item.name +
-" (S$ " + item.price + ")\n";
-
-});
-
-message += "\n";
-}
-
-let fishTotal = 0;
-let relicTotal = 0;
-
-fishCart.forEach(i=>fishTotal+=i.price);
-relicCart.forEach(i=>relicTotal+=i.price);
-
-message +=
-"━━━━━━━━━━━━━━\n";
-
-message +=
-"💵 Fish Total: $" +
-fishTotal.toFixed(2) +
-"\n";
-
-message +=
-"💰 Relic Total: S$ " +
-relicTotal.toLocaleString();
-
-window.open(
-"https://wa.me/628XXXXXXXXXX?text="
-+ encodeURIComponent(message)
-);
-
-}
-
-</script>
-
-let cart = [];
-
-function addToCart(name, price){
-
-    cart.push({
-        name:name,
-        price:Number(price)
-    });
-
-    renderCart();
-
-    localStorage.setItem(
-        "zimzamCart",
-        JSON.stringify(cart)
-    );
-
-    alert(name + " added to cart!");
-}
-
-function renderCart(){
-
-    let html = "";
-    let total = 0;
-
-    cart.forEach(item=>{
-
-        html += `
-        <p>
-            ${item.name}
-            - $${item.price}
-        </p>
-        `;
-
-        total += item.price;
-    });
-
-    const items =
-    document.getElementById("cart-items");
-
-    const totalText =
-    document.getElementById("cart-total");
-
-    const count =
-    document.getElementById("cart-count");
-
-    if(items){
-        items.innerHTML = html;
-    }
-
-    if(totalText){
-        totalText.innerText =
-        total.toFixed(2);
-    }
-
-    if(count){
-        count.innerText =
-        cart.length;
-    }
-}
-
-const totalItems =
-fishCart.length +
-relicCart.length;
-
-document.getElementById("item-count").innerText =
-totalItems;
-
-function checkout(){
-
-    if(cart.length === 0){
-
-        alert("Cart is empty");
-        return;
-    }
-
-    let total = 0;
-
-    let text =
-`Hello Zimzam Trading
-
-I want to order:
+    let message =
+`🎣 ZIMZAM TRADING FISCH
 
 `;
 
-    cart.forEach(item=>{
+    if (fishCart.length > 0) {
 
-        text +=
-`• ${item.name} - $${item.price}
-`;
+        message += "🐟 FISH ITEMS\n";
 
-        total += item.price;
-    });
+        fishCart.forEach(item => {
 
-    text +=
-`
-Total = $${total.toFixed(2)}
+            message +=
+                `• ${item.name} ($${item.price})\n`;
 
-Thank you.
-`;
+            fishTotal += item.price;
+        });
+
+        message += "\n";
+    }
+
+    if (relicCart.length > 0) {
+
+        message += "🔮 RELICS\n";
+
+        relicCart.forEach(item => {
+
+            message +=
+                `• ${item.name} (S$ ${item.price})\n`;
+
+            relicTotal += item.price;
+        });
+
+        message += "\n";
+    }
+
+    message +=
+`━━━━━━━━━━━━━━
+
+💵 Fish Total:
+$${fishTotal.toFixed(2)}
+
+💰 Relic Total:
+S$ ${relicTotal.toLocaleString()}
+
+━━━━━━━━━━━━━━
+
+🎮 Roblox Username:
+...
+
+💬 Discord Username:
+...
+
+Thank You 🙏`;
 
     window.open(
-        `https://wa.me/628881010901?text=${encodeURIComponent(text)}`,
+        "https://wa.me/628881010901?text=" +
+        encodeURIComponent(message),
         "_blank"
     );
 }
 
-window.onload = function(){
+/* =========================
+   CLEAR CART
+========================= */
+function clearCart() {
 
-    const saved =
-    localStorage.getItem("zimzamCart");
+    fishCart = [];
+    relicCart = [];
 
-    if(saved){
+    localStorage.removeItem("fishCart");
+    localStorage.removeItem("relicCart");
 
-        cart =
-        JSON.parse(saved);
+    updateTotals();
 
-        renderCart();
-    }
-};
+    alert("Cart cleared!");
+}
+
+/* =========================
+   PAGE LOAD
+========================= */
+window.addEventListener(
+    "DOMContentLoaded",
+    loadCart
+);
+
+</script>
