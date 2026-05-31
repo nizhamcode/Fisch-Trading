@@ -48,6 +48,41 @@ if(itemTotalEl){
     saveCart();
 }
 
+function renderCart(){
+
+    const cartItems =
+    document.getElementById("cart-items");
+
+    if(!cartItems) return;
+
+    let html = "";
+
+    fishCart.forEach(item=>{
+        html += `
+        <div>
+        🐟 ${item.name}
+        ($${item.price})
+        </div>
+        `;
+    });
+
+    relicCart.forEach(item=>{
+        html += `
+        <div>
+        🔮 ${item.name}
+        (S$ ${item.price})
+        </div>
+        `;
+    });
+
+    cartItems.innerHTML = html;
+}
+renderCart();
+addFish()
+addRelic()
+loadCart()
+clearCart()
+
 /* =========================
    ADD FISH
 ========================= */
