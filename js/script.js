@@ -4,31 +4,6 @@
 let fishCart = [];
 let relicCart = [];
 
-function addFish(name, price){
-
-    fishCart.push({
-        name,
-        price
-    });
-
-    updateCart();
-
-    alert(`🐟 ${name} added to cart`);
-}
-
-function addRelic(name, price){
-
-    relicCart.push({
-        name,
-        price
-    });
-
-    updateCart();
-
-    alert(`🔮 ${name} added to cart`);
-}
-
-
 
 function updateTotals(){
 
