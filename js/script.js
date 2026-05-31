@@ -1,128 +1,222 @@
+// ======================
+// CART DATA
+// ======================
 
-let cart = [];
+let fishCart = [];
+let relicCart = [];
 
-function addToCart(name, price){
+// ======================
+// SAVE & LOAD
+// ======================
 
-    cart.push({
-        name:name,
-        price:Number(price)
-    });
-
-    renderCart();
+function saveCart() {
 
     localStorage.setItem(
-        "zimzamCart",
-        JSON.stringify(cart)
+        "fishCart",
+        JSON.stringify(fishCart)
     );
+
+    localStorage.setItem(
+        "relicCart",
+        JSON.stringify(relicCart)
+    );
+}
+
+function updateBadge() {
+
+    const badge =
+    document.getElementById("cart-badge");
+
+    if (badge) {
+
+        badge.textContent =
+        fishCart.length +
+        relicCart.length;
+    }
+}
+
+// ======================
+// ADD FISH
+// ======================
+
+function addFish(name, price) {
+
+    fishCart.push({
+        name: name,
+        price: Number(price)
+    });
+
+    saveCart();
+    updateBadge();
+    renderCart();
 
     alert(name + " added to cart!");
 }
 
-function renderCart(){
+// ======================
+// ADD RELIC
+// ======================
 
-const cartItems =
-document.getElementById("cart-items");
+function addRelic(name, price) {
 
-if(!cartItems) return;
+    relicCart.push({
+        name: name,
+        price: Number(price)
+    });
 
-let html = "";
+    saveCart();
+    updateBadge();
+    renderCart();
 
-fishCart.forEach((item,index)=>{
-
-html += `
-<div class="cart-item">
-
-<div>
-🐟 ${item.name}
-<br>
-$${item.price}
-</div>
-
-<button
-onclick="removeFish(${index})">
-
-❌
-
-</button>
-
-</div>
-`;
-});
-
-relicCart.forEach((item,index)=>{
-
-html += `
-<div class="cart-item">
-
-<div>
-🔮 ${item.name}
-<br>
-S$ ${item.price}
-</div>
-
-<button
-onclick="removeRelic(${index})">
-
-❌
-
-</button>
-
-</div>
-`;
-});
-
-if(
-fishCart.length===0 &&
-relicCart.length===0
-){
-
-html=
-`
-<p class="empty-cart">
-Cart is empty
-</p>
-`;
+    alert(name + " added to cart!");
 }
 
-cartItems.innerHTML = html;
+// ======================
+// RENDER CART
+// ======================
+
+function renderCart() {
+
+    const cartItems =
+    document.getElementById("cart-items");
+
+    if (!cartItems) return;
+
+    let html = "";
+
+    // FISH
+    fishCart.forEach((item, index) => {
+
+        html += `
+        <div class="cart-item">
+
+            <div>
+                🐟 ${item.name}
+                <br>
+                $${item.price}
+            </div>
+
+            <button
+            onclick="removeFish(${index})">
+            ❌
+            </button>
+
+        </div>
+        `;
+    });
+
+    // RELIC
+    relicCart.forEach((item, index) => {
+
+        html += `
+        <div class="cart-item">
+
+            <div>
+                🔮 ${item.name}
+                <br>
+                $${item.price}
+            </div>
+
+            <button
+            onclick="removeRelic(${index})">
+            ❌
+            </button>
+
+        </div>
+        `;
+    });
+
+    if (
+        fishCart.length === 0 &&
+        relicCart.length === 0
+    ) {
+
+        html = `
+        <p class="empty-cart">
+            Cart is empty
+        </p>
+        `;
+    }
+
+    cartItems.innerHTML = html;
+
+    updateTotals();
 }
 
-function removeFish(index){
+// ======================
+// REMOVE FISH
+// ======================
 
-fishCart.splice(index,1);
+function removeFish(index) {
 
-updateTotals();
-    const badge =
-document.getElementById("cart-badge");
+    fishCart.splice(index, 1);
 
-if(badge){
-
-badge.textContent =
-fishCart.length +
-relicCart.length;
-}
-renderCart();
+    saveCart();
+    updateBadge();
+    renderCart();
 }
 
-function removeRelic(index){
+// ======================
+// REMOVE RELIC
+// ======================
 
-relicCart.splice(index,1);
+function removeRelic(index) {
 
-updateTotals();
-renderCart();
+    relicCart.splice(index, 1);
+
+    saveCart();
+    updateBadge();
+    renderCart();
 }
 
-function toggleCart(){
+// ======================
+// TOTAL
+// ======================
 
-document
-.getElementById("cart-panel")
-.classList
-.toggle("active");
+function updateTotals() {
+
+    let total = 0;
+
+    fishCart.forEach(item => {
+        total += item.price;
+    });
+
+    relicCart.forEach(item => {
+        total += item.price;
+    });
+
+    const totalElement =
+    document.getElementById("cart-total");
+
+    if (totalElement) {
+
+        totalElement.textContent =
+        "$" + total.toFixed(2);
+    }
 }
 
-function checkout(){
+// ======================
+// OPEN/CLOSE CART
+// ======================
 
-    if(cart.length === 0){
+function toggleCart() {
+
+    document
+    .getElementById("cart-panel")
+    .classList
+    .toggle("active");
+}
+
+// ======================
+// CHECKOUT WA
+// ======================
+
+function checkout() {
+
+    if (
+        fishCart.length === 0 &&
+        relicCart.length === 0
+    ) {
 
         alert("Cart is empty");
         return;
@@ -137,10 +231,21 @@ I want to order:
 
 `;
 
-    cart.forEach(item=>{
+    // FISH
+    fishCart.forEach(item => {
 
         text +=
-`• ${item.name} - $${item.price}
+`🐟 ${item.name} - $${item.price}
+`;
+
+        total += item.price;
+    });
+
+    // RELIC
+    relicCart.forEach(item => {
+
+        text +=
+`🔮 ${item.name} - $${item.price}
 `;
 
         total += item.price;
@@ -148,6 +253,7 @@ I want to order:
 
     text +=
 `
+--------------------
 Total = $${total.toFixed(2)}
 
 Thank you.
@@ -159,16 +265,28 @@ Thank you.
     );
 }
 
-window.onload = function(){
+// ======================
+// LOAD CART
+// ======================
 
-    const saved =
-    localStorage.getItem("zimzamCart");
+window.onload = function () {
 
-    if(saved){
+    const savedFish =
+    localStorage.getItem("fishCart");
 
-        cart =
-        JSON.parse(saved);
+    const savedRelic =
+    localStorage.getItem("relicCart");
 
-        renderCart();
+    if (savedFish) {
+        fishCart =
+        JSON.parse(savedFish);
     }
+
+    if (savedRelic) {
+        relicCart =
+        JSON.parse(savedRelic);
+    }
+
+    updateBadge();
+    renderCart();
 };
