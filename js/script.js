@@ -210,6 +210,19 @@ function updateTotals() {
         fishCart.length + relicCart.length;
     }
 }
+
+function clearCart(){
+
+    fishCart = [];
+    relicCart = [];
+
+    localStorage.removeItem("fishCart");
+    localStorage.removeItem("relicCart");
+
+    updateBadge();
+    renderCart();
+}
+
 // ======================
 // OPEN/CLOSE CART
 // ======================
