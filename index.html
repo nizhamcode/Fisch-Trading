@@ -27,21 +27,17 @@
 	</a></p>
     </nav>
 </header>
-<div id="cart-panel" class="cart-panel">
-
-    <div class="cart-header">
-
-        <h2>
-            🛒 Shopping Cart
-            <span id="cart-badge">0</span>
-        </h2>
-
+<!-- OVERLAY -->
 <div
 id="cart-overlay"
 class="cart-overlay"
 onclick="toggleCart()">
 </div>
 
+<!-- CART PANEL -->
+<div
+id="cart-panel"
+class="cart-panel">
 
     <div class="cart-header">
 
@@ -101,13 +97,17 @@ onclick="toggleCart()">
 
 </div>
 
+<!-- FLOATING CART BUTTON -->
 <button
 id="cart-toggle"
 class="cart-toggle"
 onclick="toggleCart()">
 
 🛒
-<span id="cart-badge-toggle">0</span>
+
+<span id="cart-badge-toggle">
+0
+</span>
 
 </button>
 
