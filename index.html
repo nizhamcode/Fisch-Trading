@@ -35,69 +35,49 @@ onclick="toggleCart()">
 </div>
 
 <!-- CART PANEL -->
-<div
-id="cart-panel"
-class="cart-panel">
+<div id="cart-overlay" class="cart-overlay"></div>
+
+<div id="cart-panel" class="cart-panel">
 
     <div class="cart-header">
-
         <h2>
             🛒 Shopping Cart
             <span id="cart-badge-panel">0</span>
         </h2>
 
         <button
-        class="close-cart"
-        onclick="toggleCart()">
-        ✖
+            class="close-cart"
+            onclick="toggleCart()">
+            ✖
         </button>
-		
-
     </div>
 
     <div id="cart-items"></div>
 
     <div class="cart-summary">
-
-        <p>
-            🐟 Fish Total:
-            <span id="fish-total">$0.00</span>
-        </p>
-
-        <p>
-            🔮 Relic Total:
-            <span id="relic-total">S$ 0</span>
-        </p>
-
-        <p>
-            📦 Items:
-            <span id="item-count">0</span>
-        </p>
-
+        <p>📦 Items:<span id="item-count">0</span></p>
+        <p>🐟 Fish Total: <span id="fish-total">$0</span></p>
+        <p>🔮 Relic Total: <span id="relic-total">$0</span></p>
     </div>
 
     <div class="cart-actions">
-
         <button
-        class="checkout-btn"
-        onclick="checkout()">
-
-        📲 Checkout WhatsApp
-
+            class="checkout-btn"
+            onclick="checkout()">
+            📲 Checkout WhatsApp
         </button>
 
         <button
-        class="clear-btn"
-        onclick="clearCart()">
-
-        🗑 Clear Cart
+            class="clear-btn"
+            onclick="clearCart()">
+            🗑 Clear Cart
 
         </button>
-
     </div>
 
 </div>
 
+<div
 <!-- FLOATING CART BUTTON -->
 <button
 id="cart-toggle"
@@ -111,6 +91,7 @@ onclick="toggleCart()">
 </span>
 
 </button>
+
 
 <main>
 <section>
