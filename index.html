@@ -31,66 +31,61 @@
 
     <div class="cart-header">
 
-        <h2>🛒 Shopping Cart</h2>
+        <h2>
+            🛒 Shopping Cart
+            <span id="cart-badge">0</span>
+        </h2>
 
-<div class="cart-actions">
-
-    <button
-        class="checkout-btn"
-        onclick="checkout()">
-
-        📲 Checkout WhatsApp
-
-    </button>
-
-    <button
-        class="clear-btn"
-        onclick="clearCart()">
-
-        🗑 Clear Cart
-
-    </button>
-
-</div>
-		
-    </div>
-
-    <div
-    id="cart-items"
-    class="cart-items">
-
-        <p class="empty-cart">
-            Cart is empty
-        </p>
+        <button
+            class="close-cart"
+            onclick="toggleCart()">
+            ✕
+        </button>
 
     </div>
-	
-    <div class="cart-footer">
+
+    <div id="cart-items"></div>
+
+    <div class="cart-summary">
 
         <p>
             🐟 Fish Total:
-            <span id="fish-total">
-                $0.00
-            </span>
+            <span id="fish-total">$0.00</span>
         </p>
 
         <p>
             🔮 Relic Total:
-            <span id="relic-total">
-                S$ 0
-            </span>
+            <span id="relic-total">S$ 0</span>
         </p>
 
         <p>
             📦 Items:
-            <span id="item-count">
-                0
-            </span>
+            <span id="item-count">0</span>
         </p>
 
     </div>
 
-	</div>
+    <div class="cart-actions">
+
+        <button
+            class="checkout-btn"
+            onclick="checkout()">
+
+            📲 Checkout WhatsApp
+
+        </button>
+
+        <button
+            class="clear-btn"
+            onclick="clearCart()">
+
+            🗑 Clear Cart
+
+        </button>
+
+    </div>
+
+</div>
 <button
 id="cart-toggle"
 class="cart-toggle"
