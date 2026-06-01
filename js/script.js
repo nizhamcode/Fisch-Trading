@@ -1,3 +1,29 @@
+
+function updateBadge() {
+
+    const total =
+        fishCart.length +
+        relicCart.length;
+
+    [
+        "cart-badge",
+        "cart-badge-toggle",
+        "cart-badge-panel"
+    ].forEach(id => {
+
+        const badge =
+            document.getElementById(id);
+
+        if(!badge) return;
+
+        badge.textContent = total;
+
+        badge.style.display =
+            total > 0
+            ? "flex"
+            : "none";
+    });
+}
 // ======================
 // CART DATA
 // ======================
@@ -22,54 +48,8 @@ function saveCart() {
     );
 }
 
-function updateBadge() {
 
-    const badge =
-    document.getElementById("cart-badge");
 
-    if (badge) {
-
-        badge.textContent =
-        fishCart.length +
-        relicCart.length;
-    }
-}
-
-// ======================
-// ADD FISH
-// ======================
-
-function addFish(name, price) {
-
-    fishCart.push({
-        name: name,
-        price: Number(price)
-    });
-
-    saveCart();
-    updateBadge();
-    renderCart();
-
-    alert(name + " added to cart!");
-}
-
-// ======================
-// ADD RELIC
-// ======================
-
-function addRelic(name, price) {
-
-    relicCart.push({
-        name: name,
-        price: Number(price)
-    });
-
-    saveCart();
-    updateBadge();
-    renderCart();
-
-    alert(name + " added to cart!");
-}
 
 // ======================
 // RENDER CART
@@ -213,23 +193,37 @@ function updateTotals() {
 
 function clearCart(){
 
+    if(
+        !confirm(
+            "Clear all items?"
+        )
+    ) return;
+
     fishCart = [];
     relicCart = [];
 
-    localStorage.removeItem("fishCart");
-    localStorage.removeItem("relicCart");
+    localStorage.removeItem(
+        "fishCart"
+    );
+
+    localStorage.removeItem(
+        "relicCart"
+    );
 
     updateBadge();
     renderCart();
-}
 
+    showToast(
+        "Cart cleared"
+    );
+}
 function toggleCart() {
 
     const panel =
-    document.getElementById("cart-panel");
+        document.getElementById("cart-panel");
 
     const overlay =
-    document.getElementById("cart-overlay");
+        document.getElementById("cart-overlay");
 
     if (!panel) return;
 
@@ -238,6 +232,107 @@ function toggleCart() {
     if (overlay) {
         overlay.classList.toggle("active");
     }
+
+    document.body.classList.toggle(
+        "cart-open"
+    );
+}
+
+function closeCart(){
+
+    const panel =
+        document.getElementById("cart-panel");
+
+    const overlay =
+        document.getElementById("cart-overlay");
+
+    panel?.classList.remove("active");
+    overlay?.classList.remove("active");
+
+    document.body.classList.remove(
+        "cart-open"
+    );
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const overlay =
+        document.getElementById("cart-overlay");
+
+    if (overlay) {
+
+        overlay.addEventListener(
+            "click",
+            toggleCart
+        );
+    }
+});
+
+function animateCart() {
+
+    const btn =
+    document.querySelector(".cart-toggle");
+
+    if(!btn) return;
+
+    btn.classList.add("bounce");
+
+    setTimeout(() => {
+
+        btn.classList.remove("bounce");
+
+    }, 500);
+}
+
+function addFish(name, price) {
+
+    fishCart.push({
+        name,
+        price:Number(price)
+    });
+
+    saveCart();
+    updateBadge();
+    renderCart();
+
+    animateCart();
+showToast(name + " added to cart");
+}
+
+function addRelic(name, price) {
+
+    relicCart.push({
+        name,
+        price:Number(price)
+    });
+
+    saveCart();
+    updateBadge();
+    renderCart();
+
+    animateCart();
+showToast(name + " added to cart");
+}
+function showToast(message){
+
+    const toast =
+    document.createElement("div");
+
+    toast.className =
+    "toast";
+
+    toast.textContent =
+    message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(()=>{
+        toast.classList.add("show");
+    },10);
+
+    setTimeout(()=>{
+        toast.remove();
+    },2500);
 }
 
 // ======================
@@ -281,14 +376,20 @@ I want to order:
 `🔮 ${item.name} - $${item.price}
 `;
 
+
         total += item.price;
     });
+text += `
+━━━━━━━━━━━━━━
+Total Items : ${
+fishCart.length +
+relicCart.length
+}
 
-    text +=
-`
---------------------
-Total = $${total.toFixed(2)}
-
+Total Price : $${total.toFixed(2)}
+━━━━━━━━━━━━━━
+`;
+   
 Thank you.
 `;
 
@@ -301,25 +402,32 @@ Thank you.
 // ======================
 // LOAD CART
 // ======================
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-window.onload = function () {
+        const savedFish =
+            localStorage.getItem(
+                "fishCart"
+            );
 
-    const savedFish =
-    localStorage.getItem("fishCart");
+        const savedRelic =
+            localStorage.getItem(
+                "relicCart"
+            );
 
-    const savedRelic =
-    localStorage.getItem("relicCart");
+        if(savedFish){
+            fishCart =
+            JSON.parse(savedFish);
+        }
 
-    if (savedFish) {
-        fishCart =
-        JSON.parse(savedFish);
+        if(savedRelic){
+            relicCart =
+            JSON.parse(savedRelic);
+        }
+
+        updateBadge();
+        renderCart();
+
     }
-
-    if (savedRelic) {
-        relicCart =
-        JSON.parse(savedRelic);
-    }
-
-    updateBadge();
-    renderCart();
-};
+);
