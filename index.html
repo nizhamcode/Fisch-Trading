@@ -36,11 +36,21 @@
             <span id="cart-badge">0</span>
         </h2>
 
-        <button
-            class="close-cart"
-            onclick="toggleCart()">
-            ✕
-        </button>
+<button
+id="cart-toggle"
+class="cart-toggle"
+onclick="toggleCart()">
+
+🛒
+<span id="cart-badge">0</span>
+
+</button>
+		
+       <button
+class="close-cart"
+onclick="toggleCart()">
+✖
+</button>
 
     </div>
 
@@ -85,6 +95,13 @@
 
     </div>
 
+
+<div
+id="cart-overlay"
+class="cart-overlay"
+onclick="toggleCart()">
+</div>
+	
 </div>
 <button
 id="cart-toggle"
