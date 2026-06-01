@@ -253,6 +253,47 @@ body{
     margin-left:5px;
 }
 
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:768px){
+
+    .cart-panel{
+
+        width:100%;
+
+        right:-100%;
+    }
+
+    .cart-panel.active{
+
+        right:0;
+    }
+
+    .cart-header h2{
+
+        font-size:1.4rem;
+    }
+
+    .checkout-btn{
+
+        font-size:15px;
+
+        padding:14px;
+    }
+
+    .clear-btn{
+
+        font-size:14px;
+    }
+
+    .cart-summary p{
+
+        font-size:14px;
+    }
+}
+
 /* PAYMENT BUTTON */
 
 .buy-btn{
