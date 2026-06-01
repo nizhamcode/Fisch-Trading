@@ -292,20 +292,59 @@ body.cart-open{
 /* =========================
    MOBILE
 ========================= */
-@media(max-width:600px){
+@media(max-width:768px){
 
+    .secret-grid,
+    .relic-grid{
+
+        grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(160px,1fr)
+        );
+
+        gap:15px;
+    }
+
+    .secret-card,
+    .relic-card{
+
+        padding:15px;
+    }
+
+    .secret-card img,
     .relic-card img{
+
         width:90px;
         height:90px;
     }
 
+    .secret-card h3,
+    .relic-card h3{
+
+        font-size:18px;
+    }
+
+.price{
+
+    color:#FFD700;
+
+    font-size:
+    clamp(
+        20px,
+        3vw,
+        32px
+    );
+
+    font-weight:700;
+
+    margin:10px 0;
+
+    line-height:1.3;
 }
 
 
-    .cart-panel.active{
 
-        right:0;
-    }
 
     .cart-header h2{
 
@@ -573,62 +612,53 @@ section h2{
     animation:
     cartBounce .5s;
 }
-
 .cart-panel{
 
-position:fixed;
+    position:fixed;
 
-top:50%;
-left:50%;
+    top:50%;
+    left:50%;
 
-transform:
-translate(-50%,-50%)
-scale(.85);
+    transform:
+    translate(-50%,-50%)
+    scale(.9);
 
-width:430px;
-max-width:95%;
+    width:420px;
+    max-width:95vw;
 
-max-height:85vh;
+    max-height:85vh;
 
-display:flex;
-flex-direction:column;
+    background:
+    rgba(15,23,42,.95);
 
-overflow:hidden;
+    border:
+    1px solid
+    rgba(56,189,248,.3);
 
-border-radius:24px;
+    border-radius:24px;
 
-background:
-rgba(15,23,42,.75);
+    backdrop-filter:
+    blur(20px);
 
-backdrop-filter:blur(25px);
--webkit-backdrop-filter:blur(25px);
+    overflow:hidden;
 
-opacity:0;
-visibility:hidden;
+    opacity:0;
+    visibility:hidden;
 
-transition:.35s ease;
+    transition:.35s;
 
-z-index:9999;
-
-border:
-1px solid rgba(56,189,248,.25);
-
-box-shadow:
-0 0 30px rgba(56,189,248,.15),
-0 20px 60px rgba(0,0,0,.6);
+    z-index:9999;
 }
 
 .cart-panel.active{
 
-opacity:1;
-visibility:visible;
+    opacity:1;
+    visibility:visible;
 
-transform:
-translate(-50%,-50%)
-scale(1);
+    transform:
+    translate(-50%,-50%)
+    scale(1);
 }
-
-
 
 .cart-header{
 
@@ -790,12 +820,6 @@ margin-bottom:10px;
 }
 
 
-.price{
-color:#FFD700;
-font-size:28px;
-font-weight:700;
-margin:10px 0;
-}
 
 .stock {
     margin-top: 10px;
@@ -937,7 +961,12 @@ rgba(255,255,255,.3);
 }
 
 .toast{
+ 
+ min-width:220px;
 
+    box-shadow:
+    0 10px 25px
+    rgba(0,0,0,.35);
     position:fixed;
 
     bottom:100px;
