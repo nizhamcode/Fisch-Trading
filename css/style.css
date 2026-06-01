@@ -614,31 +614,32 @@ section h2{
 }
 .cart-panel{
 
+    display:flex;
+    flex-direction:column;
+
     position:fixed;
 
     top:50%;
     left:50%;
 
-    transform:
-    translate(-50%,-50%)
-    scale(.9);
-
     width:420px;
     max-width:95vw;
 
-    max-height:85vh;
+    height:80vh;
+
+    transform:
+    translate(-50%,-50%)
+    scale(.9);
 
     background:
     rgba(15,23,42,.95);
 
     border:
-    1px solid
-    rgba(56,189,248,.3);
+    1px solid rgba(56,189,248,.3);
 
     border-radius:24px;
 
-    backdrop-filter:
-    blur(20px);
+    backdrop-filter:blur(20px);
 
     overflow:hidden;
 
@@ -647,7 +648,7 @@ section h2{
 
     transition:.35s;
 
-    z-index:9999;
+    z-index:10000;
 }
 
 .cart-panel.active{
@@ -864,12 +865,7 @@ footer{
     border-top:3px solid #38BDF8;
 }
 
-@media(max-width:600px){
-    .relic-card img{
-        width:90px;
-        height:90px;
-    }
-	
+
 /* ======================
    FOOTER
 ====================== */
