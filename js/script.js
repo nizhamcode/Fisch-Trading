@@ -223,16 +223,21 @@ function clearCart(){
     renderCart();
 }
 
-// ======================
-// OPEN/CLOSE CART
-// ======================
-
 function toggleCart() {
 
-    document
-    .getElementById("cart-panel")
-    .classList
-    .toggle("active");
+    const panel =
+    document.getElementById("cart-panel");
+
+    const overlay =
+    document.getElementById("cart-overlay");
+
+    if (!panel) return;
+
+    panel.classList.toggle("active");
+
+    if (overlay) {
+        overlay.classList.toggle("active");
+    }
 }
 
 // ======================
