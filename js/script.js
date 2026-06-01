@@ -19,9 +19,10 @@ function updateBadge() {
         badge.textContent = total;
 
         badge.style.display =
-            total > 0
-            ? "flex"
-            : "none";
+    total > 0
+    ? "inline-flex"
+    : "none";
+	
     });
 }
 // ======================
@@ -217,6 +218,7 @@ function clearCart(){
         "Cart cleared"
     );
 }
+
 function toggleCart() {
 
     const panel =
@@ -225,13 +227,16 @@ function toggleCart() {
     const overlay =
         document.getElementById("cart-overlay");
 
-    if (!panel) return;
+    if (!panel) {
+        console.error(
+            "cart-panel not found"
+        );
+        return;
+    }
 
     panel.classList.toggle("active");
 
-    if (overlay) {
-        overlay.classList.toggle("active");
-    }
+    overlay?.classList.toggle("active");
 
     document.body.classList.toggle(
         "cart-open"
@@ -379,17 +384,17 @@ I want to order:
 
         total += item.price;
     });
+	
 text += `
 ━━━━━━━━━━━━━━
 Total Items : ${
-fishCart.length +
-relicCart.length
+    fishCart.length +
+    relicCart.length
 }
 
 Total Price : $${total.toFixed(2)}
 ━━━━━━━━━━━━━━
-`;
-   
+
 Thank you.
 `;
 
