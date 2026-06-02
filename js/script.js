@@ -56,6 +56,7 @@ function saveCart() {
 // RENDER CART
 // ======================
 
+
 function renderCart() {
 
     const cartItems =
@@ -289,11 +290,13 @@ function animateCart() {
     }, 500);
 }
 
-function addFish(name, price) {
+function addFish(name, price, robux = 0, gamepassId = "") {
 
     fishCart.push({
-        name,
-        price:Number(price)
+        name: name,
+        price: Number(price),
+        robux: Number(robux),
+        gamepassId: gamepassId
     });
 
     saveCart();
@@ -301,14 +304,16 @@ function addFish(name, price) {
     renderCart();
 
     animateCart();
-showToast(name + " added to cart");
+    showToast(name + " added to cart");
 }
 
-function addRelic(name, price) {
+function addRelic(name, price, robux = 0, gamepassId = "") {
 
     relicCart.push({
-        name,
-        price:Number(price)
+        name: name,
+        price: Number(price),
+        robux: Number(robux),
+        gamepassId: gamepassId
     });
 
     saveCart();
@@ -316,7 +321,7 @@ function addRelic(name, price) {
     renderCart();
 
     animateCart();
-showToast(name + " added to cart");
+    showToast(name + " added to cart");
 }
 function showToast(message){
 
