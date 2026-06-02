@@ -1,5 +1,3 @@
-const cart = [];
-
 const fishItems = [
 
 {
@@ -704,120 +702,74 @@ function showToast(message){
 // ======================
 // CHECKOUT WA
 // ======================
-
-let totalRobux = 0;
-totalRobux += item.robux;
-totalRobux += item.robux;
-text += `
-━━━━━━━━━━━━━━
-
-📦 Items :
-${fishCart.length + relicCart.length}
-
-💵 USD :
-$${totalUSD.toFixed(2)}
-
-🎮 Robux :
-${totalRobux}
-
-━━━━━━━━━━━━━━
-`;
-
 function checkout() {
 
     if (
         fishCart.length === 0 &&
         relicCart.length === 0
     ) {
-
         alert("Cart is empty");
         return;
     }
 
-    let total = 0;
+    let totalUSD = 0;
+    let totalRobux = 0;
 
     let text =
-`Hello Zimzam Trading
+`🎣 ZIMZAM TRADING FISCH
 
 I want to order:
 
 `;
 
-    // FISH
-fishCart.forEach((item,index)=>{
+    fishCart.forEach(item => {
 
-html += `
-<div class="cart-item">
+        text +=
+`🐟 ${item.name}
+USD : $${item.usd}
+IDR : Rp${item.idr.toLocaleString()}
+Robux : ${item.robux}
 
-<div>
-
-🐟 ${item.name}
-
-<br>
-
-💵 $${item.usd}
-
-<br>
-
-💰 Rp${item.idr.toLocaleString()}
-
-<br>
-
-🎮 ${item.robux} Robux
-
-</div>
-
-<button
-onclick="removeFish(${index})">
-❌
-</button>
-
-</div>
 `;
 
-});
+        totalUSD += item.usd;
+        totalRobux += item.robux;
+    });
 
-	
-    // RELIC
-  relicCart.forEach((item,index)=>{
+    relicCart.forEach(item => {
 
-html += `
-<div class="cart-item">
+        text +=
+`🔮 ${item.name}
+Scrip : ${item.scrip}
+USD : $${item.usd}
+Robux : ${item.robux}
 
-<div>
-
-🔮 ${item.name}
-
-<br>
-
-S$ ${item.scrip.toLocaleString()}
-
-<br>
-
-💵 $${item.usd}
-
-<br>
-
-🎮 ${item.robux} Robux
-
-</div>
-
-<button
-onclick="removeRelic(${index})">
-❌
-</button>
-
-</div>
 `;
 
-});
+        totalUSD += item.usd;
+        totalRobux += item.robux;
+    });
 
-	
-		fishTotal += Number(item.usd);
-		relicTotal += Number(item.scrip);
+    const payment =
+        document.getElementById(
+            "payment-method"
+        )?.value || "QRIS";
 
-	
-Total Price : $${total.toFixed(2)}
+    text += `
+━━━━━━━━━━━━━━
+
+📦 Items :
+${fishCart.length + relicCart.length}
+
+💵 Total USD :
+$${totalUSD.toFixed(2)}
+
+🎮 Total Robux :
+${totalRobux}
+
+💳 Payment :
+${payment}
+
 ━━━━━━━━━━━━━━
 
 Thank you.
@@ -828,6 +780,7 @@ Thank you.
         "_blank"
     );
 }
+
 
 // ======================
 // LOAD CART
