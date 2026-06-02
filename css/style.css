@@ -1,5 +1,3 @@
-
-
 *{
     margin:0;
     padding:0;
@@ -373,7 +371,29 @@ body.cart-open{
     text-shadow:
         0 0 10px rgba(255,215,0,.3);
 }
+    
+.price-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin:10px 0;
+}
 
+.price-scrip{
+    color:#FFD700;
+    font-weight:bold;
+}
+
+.price-usd{
+    color:#22C55E;
+    font-weight:bold;
+}
+
+.price-robux{
+    color:#38BDF8;
+    font-weight:bold;
+}
+    
 .cart-panel{
     border:3px solid red !important;
 }
