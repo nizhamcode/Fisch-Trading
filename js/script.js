@@ -66,6 +66,17 @@ function renderCart() {
     let html = "";
 
     // FISH
+	fishCart.forEach(item=>{
+
+text +=
+`🐟 ${item.name}
+USD : $${item.usd}
+IDR : Rp${item.idr.toLocaleString()}
+Robux : ${item.robux}
+\n`;
+
+});
+	
     fishCart.forEach((item, index) => {
 
         html += `
@@ -87,7 +98,19 @@ function renderCart() {
     });
 
     // RELIC
-    relicCart.forEach((item, index) => {
+    relicCart.forEach(item=>{
+
+text +=
+`🔮 ${item.name}
+Scrip : ${item.scrip}
+USD : $${item.usd}
+Robux : ${item.robux}
+\n`;
+
+});
+	
+	
+	relicCart.forEach((item, index) => {
 
         html += `
         <div class="cart-item">
@@ -364,6 +387,24 @@ function showToast(message){
 // CHECKOUT WA
 // ======================
 
+let totalRobux = 0;
+totalRobux += item.robux;
+totalRobux += item.robux;
+text += `
+━━━━━━━━━━━━━━
+
+📦 Items :
+${fishCart.length + relicCart.length}
+
+💵 USD :
+$${totalUSD.toFixed(2)}
+
+🎮 Robux :
+${totalRobux}
+
+━━━━━━━━━━━━━━
+`;
+
 function checkout() {
 
     if (
@@ -502,3 +543,19 @@ document.addEventListener(
 
     }
 );
+
+
+const payment =
+document.getElementById(
+"payment-method"
+).value;
+
+
+
+text += `
+Payment Method:
+${payment}
+`;
+
+
+
