@@ -1,5 +1,4 @@
-
-function updateBadge() {
+	function updateBadge() {
 
     const total =
         fishCart.length +
@@ -155,42 +154,36 @@ function removeRelic(index) {
 // TOTAL
 // ======================
 
-function updateTotals() {
+function updateTotals(){
 
-    let fishTotal = 0;
-    let relicTotal = 0;
+let fishTotalUSD = 0;
+let relicTotalScrip = 0;
 
-    fishCart.forEach(item => {
-        fishTotal += Number(item.price);
-    });
+fishCart.forEach(item=>{
+    fishTotalUSD += item.usd;
+});
 
-    relicCart.forEach(item => {
-        relicTotal += Number(item.price);
-    });
+relicCart.forEach(item=>{
+    relicTotalScrip += item.scrip;
+});
 
-    const fishElement =
-    document.getElementById("fish-total");
+document.getElementById(
+"fish-total"
+).textContent =
+"$" + fishTotalUSD.toFixed(2);
 
-    const relicElement =
-    document.getElementById("relic-total");
+document.getElementById(
+"relic-total"
+).textContent =
+"S$ " +
+relicTotalScrip.toLocaleString();
 
-    const itemElement =
-    document.getElementById("item-count");
+document.getElementById(
+"item-count"
+).textContent =
+fishCart.length +
+relicCart.length;
 
-    if(fishElement){
-        fishElement.textContent =
-        "$" + fishTotal.toFixed(2);
-    }
-
-    if(relicElement){
-        relicElement.textContent =
-        "S$ " + relicTotal.toLocaleString();
-    }
-
-    if(itemElement){
-        itemElement.textContent =
-        fishCart.length + relicCart.length;
-    }
 }
 
 function clearCart(){
@@ -289,14 +282,21 @@ function animateCart() {
 
     }, 500);
 }
-
-function addFish(name, price, robux = 0, gamepassId = "") {
+function addFish(
+    name,
+    usd,
+    idr,
+    scrip,
+    robux
+){
 
     fishCart.push({
-        name: name,
-        price: Number(price),
+        name,
+        usd: Number(usd),
+        idr: Number(idr),
+        scrip: Number(scrip),
         robux: Number(robux),
-        gamepassId: gamepassId
+        category: "fish"
     });
 
     saveCart();
@@ -304,25 +304,40 @@ function addFish(name, price, robux = 0, gamepassId = "") {
     renderCart();
 
     animateCart();
-    showToast(name + " added to cart");
+
+    showToast(
+        name + " added!"
+    );
 }
 
-function addRelic(name, price, robux = 0, gamepassId = "") {
+function addRelic(
+    name,
+    usd,
+    idr,
+    scrip,
+    robux
+){
 
     relicCart.push({
-        name: name,
-        price: Number(price),
+        name,
+        usd: Number(usd),
+        idr: Number(idr),
+        scrip: Number(scrip),
         robux: Number(robux),
-        gamepassId: gamepassId
+        category: "relic"
     });
 
     saveCart();
     updateBadge();
     renderCart();
-
     animateCart();
-    showToast(name + " added to cart");
+
+	showToast(
+        name + " added!"
+    );
 }
+
+
 function showToast(message){
 
     const toast =
@@ -370,33 +385,79 @@ I want to order:
 `;
 
     // FISH
-    fishCart.forEach(item => {
+fishCart.forEach((item,index)=>{
 
-        text +=
-`🐟 ${item.name} - $${item.price}
+html += `
+<div class="cart-item">
+
+<div>
+
+🐟 ${item.name}
+
+<br>
+
+💵 $${item.usd}
+
+<br>
+
+💰 Rp${item.idr.toLocaleString()}
+
+<br>
+
+🎮 ${item.robux} Robux
+
+</div>
+
+<button
+onclick="removeFish(${index})">
+❌
+</button>
+
+</div>
 `;
 
-        total += item.price;
-    });
+});
 
-    // RELIC
-    relicCart.forEach(item => {
-
-        text +=
-`🔮 ${item.name} - $${item.price}
-`;
-
-
-        total += item.price;
-    });
 	
-text += `
-━━━━━━━━━━━━━━
-Total Items : ${
-    fishCart.length +
-    relicCart.length
-}
+    // RELIC
+  relicCart.forEach((item,index)=>{
 
+html += `
+<div class="cart-item">
+
+<div>
+
+🔮 ${item.name}
+
+<br>
+
+S$ ${item.scrip.toLocaleString()}
+
+<br>
+
+💵 $${item.usd}
+
+<br>
+
+🎮 ${item.robux} Robux
+
+</div>
+
+<button
+onclick="removeRelic(${index})">
+❌
+</button>
+
+</div>
+`;
+
+});
+
+	
+		fishTotal += Number(item.usd);
+		relicTotal += Number(item.scrip);
+
+	
 Total Price : $${total.toFixed(2)}
 ━━━━━━━━━━━━━━
 
