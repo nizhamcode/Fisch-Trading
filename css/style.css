@@ -124,12 +124,27 @@ body.cart-open{
     1px solid rgba(255,255,255,.08);
 }
 
-.robux-price{
-    color:#22C55E;
-    font-weight:bold;
-    margin-top:8px;
+.price-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin:10px 0;
 }
 
+.price-scrip{
+    color:#FFD700;
+    font-weight:bold;
+}
+
+.price-usd{
+    color:#22C55E;
+    font-weight:bold;
+}
+
+.price-robux{
+    color:#38BDF8;
+    font-weight:bold;
+}
 .gamepass-id{
     color:#94A3B8;
     font-size:12px;
