@@ -1,3 +1,32 @@
+
+
+function updateBadge() {
+
+    const total =
+        fishCart.length +
+        relicCart.length;
+
+    [
+        "cart-badge",
+        "cart-badge-toggle",
+        "cart-badge-panel"
+    ].forEach(id => {
+
+        const badge =
+            document.getElementById(id);
+
+        if(!badge) return;
+
+        badge.textContent = total;
+
+        badge.style.display =
+    total > 0
+    ? "inline-flex"
+    : "none";
+	
+    });
+}
+
 // ======================
 // CART DATA
 // ======================
