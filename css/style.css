@@ -125,16 +125,12 @@ body.cart-open{
 }
 
 .price-box{
-
     display:flex;
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:8px;
-
-    margin:15px 0;
+    flex-direction:column;
+    gap:6px;
+    margin:10px 0;
 }
+
 
 .price-scrip,
 .price-usd,
