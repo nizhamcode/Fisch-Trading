@@ -124,26 +124,97 @@ body.cart-open{
     1px solid rgba(255,255,255,.08);
 }
 
-.price-group{
+.price-box{
+
     display:flex;
     flex-direction:column;
-    gap:6px;
-    margin:10px 0;
+
+    gap:8px;
+
+    margin:15px 0;
+
+    padding:12px;
+
+    background:#0F172A;
+
+    border:1px solid #334155;
+
+    border-radius:12px;
+
 }
+
+.price-scrip,
+.price-usd,
+.price-robux{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px;
+
+    border-radius:8px;
+
+    font-weight:700;
+
+    font-size:15px;
+
+    letter-spacing:.5px;
+
+}
+
+/* Shady Scrip */
 
 .price-scrip{
-    color:#FFD700;
-    font-weight:bold;
+
+    background:
+    linear-gradient(
+        90deg,
+        #F59E0B,
+        #FFD700
+    );
+
+    color:#111827;
+
+    box-shadow:
+    0 0 12px rgba(255,215,0,.4);
+
 }
+
+/* USD */
 
 .price-usd{
-    color:#22C55E;
-    font-weight:bold;
+
+    background:
+    linear-gradient(
+        90deg,
+        #15803D,
+        #22C55E
+    );
+
+    color:white;
+
+    box-shadow:
+    0 0 12px rgba(34,197,94,.4);
+
 }
 
+/* ROBUX */
+
 .price-robux{
-    color:#38BDF8;
-    font-weight:bold;
+
+    background:
+    linear-gradient(
+        90deg,
+        #0284C7,
+        #38BDF8
+    );
+
+    color:white;
+
+    box-shadow:
+    0 0 12px rgba(56,189,248,.4);
+
 }
 .gamepass-id{
     color:#94A3B8;
