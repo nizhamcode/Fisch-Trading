@@ -126,7 +126,7 @@ body.cart-open{
 
 .price-box{
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     align-items:center;
     justify-content:center;
     gap:3px;
@@ -138,11 +138,11 @@ body.cart-open{
 .price-usd,
 .price-robux{
 
-    padding:5px 8px;
+    padding:8px 10px;
 
-    border-radius:499px;
+    border-radius:699px;
 
-    font-size:10px;
+    font-size:12px;
 
     font-weight:bold;
 
