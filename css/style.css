@@ -138,11 +138,11 @@ body.cart-open{
 .price-usd,
 .price-robux{
 
-    padding:8px 10px;
+    padding:5px 8px;
 
-    border-radius:999px;
+    border-radius:499px;
 
-    font-size:13px;
+    font-size:10px;
 
     font-weight:bold;
 
